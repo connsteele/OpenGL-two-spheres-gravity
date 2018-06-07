@@ -1,0 +1,4 @@
+Changes to bonestructure and animation base code from polylearn
+   - Change to x86
+   - change half in plane shader to h
+   - remove unsigned from "in int vertimat;" from shader_vert
