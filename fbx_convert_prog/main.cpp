@@ -453,9 +453,9 @@ public:
 		linerender.re_init_line(line);
 
 		//prepare stars
-		mystar1.pos = vec3(0, 0.9, -10);
-		mystar1.speed = vec3(0, 15, 0); //want to be perpendick
-		mystar2.pos = vec3(0, -0.9, -10);
+		mystar1.pos = vec3(0, 0.7, -4);
+		mystar1.speed = vec3(0, 15, 0); //speeds should be perpendicular so they go into orbit
+		mystar2.pos = vec3(0, -0.7, -4);
 		mystar2.speed = vec3(15, 0, 0);
 	}
 
@@ -623,36 +623,13 @@ public:
 		pplane->unbind();
 
 
-		//draw the lines
 
-		//Draw the billboards used in the gravity animation
+
+		//-------- stuff for gravity btwn 2 spheres -------//
 		prog->bind();
-		//send the matrices to the shaders, old bone stuff
-		//glUniformMatrix4fv(prog->getUniform("P"), 1, GL_FALSE, &P[0][0]);
-		//glUniformMatrix4fv(prog->getUniform("V"), 1, GL_FALSE, &V[0][0]);
-		//glUniformMatrix4fv(prog->getUniform("M"), 1, GL_FALSE, &M[0][0]);
-		//glUniform3fv(prog->getUniform("campos"), 1, &mycam.pos[0]);	
-		//glBindVertexArray(VertexArrayID);
-		////actually draw from vertex 0, 3 vertices
-		////glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, (void*)0);
-		//mat4 Vi = glm::transpose(V);
-		//Vi[0][3] = 0;
-		//Vi[1][3] = 0;
-		//Vi[2][3] = 0;
-		//glActiveTexture(GL_TEXTURE0);
-		//glBindTexture(GL_TEXTURE_2D, Texture);
+		
 
-		//
-
-		//glm::mat4 TransZ = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -8));
-		//glm::mat4 S = glm::scale(glm::mat4(1.0f), glm::vec3(0.01f, 0.01f, 0.01f));
-		//M = TransZ * S;
-		//glUniformMatrix4fv(prog->getUniform("M"), 1, GL_FALSE, &M[0][0]);
-		//glUniformMatrix4fv(prog->getUniform("Manim"), 200, GL_FALSE, &animmat[0][0][0]);
-		//glDrawArrays(GL_LINES, 4, size_stick-4);
-		//glBindVertexArray(0);
-
-		//2x spheres rendering
+		//---------- 2x spheres rendering ------------------------////
 
 		//particle collisions logic, starts are initialzed in initGeom
 		static float m1 = 1, m2 = 2, G = 1E-1;
@@ -684,7 +661,7 @@ public:
 		
 
 		glm::mat4 TransS = glm::translate(glm::mat4(1.0f), mystar1.pos);
-		glm::mat4 S = glm::scale(glm::mat4(1.0f), glm::vec3(0.5));
+		glm::mat4 S = glm::scale(glm::mat4(1.0f), glm::vec3(0.1));
 		M = TransS * S;
 		glUniformMatrix4fv(prog->getUniform("M"), 1, GL_FALSE, &M[0][0]);
 		glUniformMatrix4fv(prog->getUniform("Manim"), 200, GL_FALSE, &animmat[0][0][0]);
@@ -693,7 +670,7 @@ public:
 
 		//draw the 2nd particle
 		TransS = glm::translate(glm::mat4(1.0f), mystar2.pos);
-		S = glm::scale(glm::mat4(1.0f), glm::vec3(0.5));
+		S = glm::scale(glm::mat4(1.0f), glm::vec3(0.1));
 		M = TransS * S;
 		glUniformMatrix4fv(prog->getUniform("M"), 1, GL_FALSE, &M[0][0]);
 		glUniformMatrix4fv(prog->getUniform("Manim"), 200, GL_FALSE, &animmat[0][0][0]);
